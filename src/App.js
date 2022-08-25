@@ -1,23 +1,19 @@
 import { useState } from 'react';
-
+import { todoData } from './data';
 import CreateTodo from './components/CreateTodo';
 import Header from './components/Header';
 import Todos from './components/Todos';
-
-import { todoData } from './data';
-
+import { ThemeProvider } from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-
 import GlobalStyles, { Footer } from './components/styles/GlobalStyles';
+import { lightTheme, darkTheme } from './components/styles/Theme.styled'
 
 function App() {
 	const [isLightTheme, setIsLightTheme] = useState(true);
-
 	const [todos, setTodos] = useState(todoData);
 
 	// Check a TODO
 	const checkTodo = (id) => {
-		console.log(id);
 		setTodos(
 			todos.map((todo) => {
 				if (todo.id === id) {
@@ -43,17 +39,47 @@ function App() {
 		setTodos([...todos, newTodo]);
 	};
 
+	// Clear completed todos
+	const clearCompletedTodos = () => {
+		const remainingTodo = todos.filter((todo) => todo.completed === false);
+		setTodos(remainingTodo);
+	};
+
+
+	/********************** FILTER TODOS ******************/
+	// All Todos
+	const getAllTodos =()=> {
+		setTodos(todos);
+	}
+
+	// Active Todos
+	const getActiveTodos = () => {
+		setTodos(todos.filter(todos => todos.completed === false));
+	};
+	// Completed Todos
+	const getCompletedTodos = () => {
+		setTodos(todos.filter(todos => todos.completed === true));
+	};
+
 	return (
-		<>
+		<ThemeProvider theme={ isLightTheme ? lightTheme : darkTheme}>
 			<GlobalStyles />
 			<div className='App'>
 				<Header isLightTheme={isLightTheme} setIsLightTheme={setIsLightTheme} />
 				<CreateTodo createTodo={createTodo} />
-				<Todos todos={todos} checkTodo={checkTodo} deleteTodo={deleteTodo} />
+				<Todos
+					todos={todos}
+					checkTodo={checkTodo}
+					deleteTodo={deleteTodo}
+					clearCompletedTodos={clearCompletedTodos}
+					getAllTodos={getAllTodos}
+					getActiveTodos={getActiveTodos}
+					getCompletedTodos={getCompletedTodos}
+				/>
 
 				<Footer>Drag and drop to reorder list</Footer>
 			</div>
-		</>
+		</ThemeProvider>
 	);
 }
 

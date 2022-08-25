@@ -3,8 +3,8 @@ import colors from "../../constants/colors";
 
 export const TodosContainer = styled.div`
     border-radius: 5px;
-    box-shadow: 0 0 3px grey;
-    background: #fff;
+    box-shadow: 0 0 3px ${(props) => props.theme.colors.circle};
+    background: ${(props) => props.theme.colors.todoBackground};
 `
 
 export const TodoList = styled.div`
@@ -15,7 +15,7 @@ export const TodoList = styled.div`
 `
 
 export const TodoItemContainer = styled.div`
-    border-bottom: 1px solid lightGray;
+    border-bottom: 1px solid ${(props) => props.theme.colors.circle};
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -24,6 +24,7 @@ export const TodoItemContainer = styled.div`
         display: flex;
         align-items: center;
         gap: 20px;
+        color: ${(props)=> props.theme.colors.text};
     }
     .completed {
         text-decoration: line-through;
@@ -36,11 +37,16 @@ export const TodoItemContainer = styled.div`
         }
     }
 `
+
+export const CheckerContainer = styled.div`
+    max-width: 24px;
+    max-height: 24px;
+`
 export const Checker = styled.div`
     height: 24px;
     width: 24px;
     border-radius: 50%;
-    border: 1px solid ${colors.veryLightGrayishBlue};
+    border: 1px solid ${(props) => props.theme.colors.circle};
     position: relative;
     background-color: inherit;
     &:hover {

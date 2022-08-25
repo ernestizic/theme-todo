@@ -3,8 +3,15 @@ import TodoItem from './TodoItem';
 import { TodoList, TodosContainer } from './styles/Todo.styled';
 import TodoFooter from './TodoFooter';
 
-const Todos = ({todos, checkTodo, deleteTodo}) => {
-
+const Todos = ({
+	todos,
+	checkTodo,
+	deleteTodo,
+	clearCompletedTodos,
+	getAllTodos,
+	getCompletedTodos,
+	getActiveTodos,
+}) => {
 	return (
 		<TodosContainer>
 			<TodoList>
@@ -18,10 +25,16 @@ const Todos = ({todos, checkTodo, deleteTodo}) => {
 						/>
 					))
 				) : (
-					<div className='empty-list'>Nothing left to do</div>
+					<div className='empty-list'>Nothing to see here...</div>
 				)}
 			</TodoList>
-			<TodoFooter />
+			<TodoFooter
+				todos={todos}
+				clearCompletedTodos={clearCompletedTodos}
+				getAllTodos={getAllTodos}
+				getActiveTodos={getActiveTodos}
+				getCompletedTodos={getCompletedTodos}
+			/>
 		</TodosContainer>
 	);
 };

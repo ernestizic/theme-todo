@@ -1,15 +1,24 @@
 import React from 'react';
 import { ListFooter, FilterContainer } from './styles/TodoFooter.styled';
-const TodoFooter = () => {
+const TodoFooter = ({
+	todos,
+	clearCompletedTodos,
+	getAllTodos,
+	getCompletedTodos,
+	getActiveTodos,
+}) => {
+	const remainingTodo = todos.filter((todo) => todo.completed === false);
 	return (
 		<ListFooter>
-			<p>5 items left</p>
-            <FilterContainer>
-                <button>All</button>
-                <button>Active</button>
-                <button>Completed</button>
-            </FilterContainer>
-			<p className='clear-completed'>Clear Completed</p>
+			<p>{remainingTodo.length} items left</p>
+			<FilterContainer>
+				<button onClick={getAllTodos}>All</button>
+				<button onClick={getActiveTodos}>Active</button>
+				<button onClick={getCompletedTodos}>Completed</button>
+			</FilterContainer>
+			<p className='clear-completed' onClick={clearCompletedTodos}>
+				Clear Completed
+			</p>
 		</ListFooter>
 	);
 };
