@@ -11,6 +11,7 @@ export const TodoList = styled.div`
     .empty-list {
         padding: 80px 0;
         text-align: center;
+        color: ${(props) => props.theme.colors.text};
     }
 `
 
