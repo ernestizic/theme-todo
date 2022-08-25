@@ -3,7 +3,7 @@ import { TodoForm } from './styles/CreateTodo.styled';
 
 const CreateTodo = ({ createTodo }) => {
 	const [text, setText] = useState('');
-	
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		createTodo(text);
@@ -11,7 +11,7 @@ const CreateTodo = ({ createTodo }) => {
 	};
 	return (
 		<TodoForm onSubmit={handleSubmit}>
-            <span className='form-circle'></span>
+			<span className='form-circle'></span>
 			<input
 				type='text'
 				placeholder='Create a new todo...'

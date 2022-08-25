@@ -34,5 +34,8 @@ export const TodoForm = styled.form`
 
     @media only screen and (min-device-width: 360px) and (max-device-width: 768px) {
         margin: 20px 0;
+        input{
+            font-size: 14px;
+        }
     }
     `

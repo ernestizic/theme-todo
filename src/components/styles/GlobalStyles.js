@@ -1,10 +1,7 @@
 import styled, { createGlobalStyle } from 'styled-components';
 import colors from '../../constants/colors';
 
-// import * as theme from "./Theme.styled"
-
 const GlobalStyles = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
 
     * {
         box-sizing: border-box;

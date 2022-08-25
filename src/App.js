@@ -1,16 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { todoData } from './data';
 import CreateTodo from './components/CreateTodo';
 import Header from './components/Header';
 import Todos from './components/Todos';
 import { ThemeProvider } from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
+import { lightTheme, darkTheme } from './components/styles/Theme.styled';
 import GlobalStyles, { Footer } from './components/styles/GlobalStyles';
-import { lightTheme, darkTheme } from './components/styles/Theme.styled'
+import './App.css';
 
 function App() {
+	// todo data is gotten from data.js file
 	const [isLightTheme, setIsLightTheme] = useState(true);
 	const [todos, setTodos] = useState(todoData);
+	const [todoList, setTodoList] = useState([]);
+
+	useEffect(() => {
+		setTodoList(todos);
+	}, [todos]);
 
 	// Check a TODO
 	const checkTodo = (id) => {
@@ -45,30 +52,29 @@ function App() {
 		setTodos(remainingTodo);
 	};
 
-
 	/********************** FILTER TODOS ******************/
 	// All Todos
-	const getAllTodos =()=> {
-		setTodos(todos);
-	}
+	const getAllTodos = () => {
+		setTodoList([...todos]);
+	};
 
 	// Active Todos
 	const getActiveTodos = () => {
-		setTodos(todos.filter(todos => todos.completed === false));
+		setTodoList(todos.filter((todo) => todo.completed === false));
 	};
 	// Completed Todos
 	const getCompletedTodos = () => {
-		setTodos(todos.filter(todos => todos.completed === true));
+		setTodoList(todos.filter((todo) => todo.completed === true));
 	};
 
 	return (
-		<ThemeProvider theme={ isLightTheme ? lightTheme : darkTheme}>
+		<ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
 			<GlobalStyles />
 			<div className='App'>
 				<Header isLightTheme={isLightTheme} setIsLightTheme={setIsLightTheme} />
 				<CreateTodo createTodo={createTodo} />
 				<Todos
-					todos={todos}
+					todos={todoList}
 					checkTodo={checkTodo}
 					deleteTodo={deleteTodo}
 					clearCompletedTodos={clearCompletedTodos}

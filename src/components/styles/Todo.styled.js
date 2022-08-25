@@ -25,6 +25,10 @@ export const TodoItemContainer = styled.div`
         align-items: center;
         gap: 20px;
         color: ${(props)=> props.theme.colors.text};
+        @media only screen and (min-device-width: 360px) and (max-device-width: 768px) {
+            font-size: 14px;
+            gap: 10px;
+        }
     }
     .completed {
         text-decoration: line-through;
