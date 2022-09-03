@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+
 import { todoData } from './data';
 import CreateTodo from './components/CreateTodo';
 import Header from './components/Header';
@@ -12,12 +13,19 @@ import './App.css';
 function App() {
 	// todo data is gotten from data.js file
 	const [isLightTheme, setIsLightTheme] = useState(true);
-	const [todos, setTodos] = useState(todoData);
-	const [todoList, setTodoList] = useState([]);
+	const [todos, setTodos] = useState([]);
+	const [filteredList, setFilteredList] = useState(null);
+
+	const initState = {
+		all: true,
+		active: false,
+		completed: false,
+	};
+	const [activeClass, setActiveClass] = useState(initState);
 
 	useEffect(() => {
-		setTodoList(todos);
-	}, [todos]);
+		setTodos(todoData);
+	}, []);
 
 	// Check a TODO
 	const checkTodo = (id) => {
@@ -33,6 +41,7 @@ function App() {
 
 	// Delete a Todo
 	const deleteTodo = (id) => {
+		console.log(id);
 		setTodos(todos.filter((todo) => todo.id !== id));
 	};
 
@@ -55,32 +64,38 @@ function App() {
 	/********************** FILTER TODOS ******************/
 	// All Todos
 	const getAllTodos = () => {
-		setTodoList([...todos]);
+		setFilteredList(null);
+		setActiveClass({ ...initState, all: true });
 	};
 
 	// Active Todos
 	const getActiveTodos = () => {
-		setTodoList(todos.filter((todo) => todo.completed === false));
+		setFilteredList(todos.filter((todo) => todo.completed === false));
+		setActiveClass({ ...initState, all: false, active: true });
 	};
+
 	// Completed Todos
 	const getCompletedTodos = () => {
-		setTodoList(todos.filter((todo) => todo.completed === true));
+		setFilteredList(todos.filter((todo) => todo.completed === true));
+		setActiveClass({ ...initState, all: false, completed: true });
 	};
 
 	return (
 		<ThemeProvider theme={isLightTheme ? lightTheme : darkTheme}>
 			<GlobalStyles />
+
 			<div className='App'>
 				<Header isLightTheme={isLightTheme} setIsLightTheme={setIsLightTheme} />
 				<CreateTodo createTodo={createTodo} />
 				<Todos
-					todos={todoList}
+					todos={filteredList ? filteredList : todos}
 					checkTodo={checkTodo}
 					deleteTodo={deleteTodo}
 					clearCompletedTodos={clearCompletedTodos}
 					getAllTodos={getAllTodos}
 					getActiveTodos={getActiveTodos}
 					getCompletedTodos={getCompletedTodos}
+					activeClass={activeClass}
 				/>
 
 				<Footer>Drag and drop to reorder list</Footer>

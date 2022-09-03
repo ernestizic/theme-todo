@@ -11,6 +11,7 @@ const Todos = ({
 	getAllTodos,
 	getCompletedTodos,
 	getActiveTodos,
+	activeClass
 }) => {
 	return (
 		<TodosContainer>
@@ -34,6 +35,7 @@ const Todos = ({
 				getAllTodos={getAllTodos}
 				getActiveTodos={getActiveTodos}
 				getCompletedTodos={getCompletedTodos}
+				activeClass={activeClass}
 			/>
 		</TodosContainer>
 	);

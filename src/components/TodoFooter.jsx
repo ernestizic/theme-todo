@@ -6,15 +6,16 @@ const TodoFooter = ({
 	getAllTodos,
 	getCompletedTodos,
 	getActiveTodos,
+	activeClass
 }) => {
 	const remainingTodo = todos.filter((todo) => todo.completed === false);
 	return (
 		<ListFooter>
 			<p>{remainingTodo.length} items left</p>
 			<FilterContainer>
-				<button onClick={getAllTodos}>All</button>
-				<button onClick={getActiveTodos}>Active</button>
-				<button onClick={getCompletedTodos}>Completed</button>
+				<a href='##' onClick={getAllTodos} className={activeClass.all ? 'active' : ''}>All</a>
+				<a href='##' onClick={getActiveTodos} className={activeClass.active ? 'active' : ''}>Active</a>
+				<a href='##' onClick={getCompletedTodos} className={activeClass.completed ? 'active' : ''}>Completed</a>
 			</FilterContainer>
 			<p className='clear-completed' onClick={clearCompletedTodos}>
 				Clear Completed

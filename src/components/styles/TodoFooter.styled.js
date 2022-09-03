@@ -19,16 +19,15 @@ export const ListFooter = styled.footer`
 `
 
 export const FilterContainer = styled.div`
-    button{
+    a{
         margin: 0 10px;
         background: none;
-        border: none;
         font-weight: bold;
+        text-decoration: none;
         color: ${colors.darkGrayishBlue};
-        &:hover{
-            cursor: pointer;
-            color: ${(props)=> props.theme.colors.text};
-        }
+    }
+    .active {
+        color: ${colors.brightBlue};
     }
 
     @media only screen and (min-device-width: 360px) and (max-device-width: 768px) {
