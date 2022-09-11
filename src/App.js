@@ -22,10 +22,17 @@ function App() {
 		completed: false,
 	};
 	const [activeClass, setActiveClass] = useState(initState);
-
+	
 	useEffect(() => {
 		setTodos(todoData);
 	}, []);
+
+	useEffect(()=> {
+		const userTheme = localStorage.getItem('theme');
+		if (userTheme) {
+			setIsLightTheme(JSON.parse(userTheme));
+		}
+	}, [])
 
 	// Check a TODO
 	const checkTodo = (id) => {
